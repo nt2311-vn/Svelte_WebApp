@@ -2,15 +2,19 @@
 	import '../app.css';
 	import Footer from '../components/Footer.svelte';
 	import { openModal } from '../store';
+	import CTAs from '../components/CTAs.svelte';
 	let y;
 	$: outerHeight = 0;
 
-	function reroute(href) {}
+	function reroute(href) {
+		$openModal = false;
+		window.location.href = href;
+	}
 </script>
 
 {#if $openModal}
 	<div
-		class="fixed top-0 left-0 w-screen h-screen border-b bg-white z-50 flex flex-col gap-8 p-5 px-8"
+		class="fixed top-0 left-0 w-screen h-screen border-b bg-white z-50 flex flex-col gap-8 p-5 px-8 md:hidden"
 	>
 		<div class="flex items-center justify-between gap-4 border-b pb-2">
 			<h1 class="font-semibold">
@@ -20,6 +24,28 @@
 				<i class="fa-solid fa-xmark text-2xl"></i>
 			</button>
 		</div>
+		<div class="flex flex-col gap-4 flex-1">
+			<button
+				on:click={() => reroute('#product')}
+				class="border-none outline-none p-2 group duaration-200 cursor-pointer"
+			>
+				<p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">Product</p>
+			</button>
+			<button
+				on:click={() => reroute('#reviews')}
+				class="border-none outline-none p-2 group duaration-200 cursor-pointer"
+			>
+				<p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">Reviews</p>
+			</button>
+			<button
+				on:click={() => reroute('#faps')}
+				class="border-none outline-none p-2 group duaration-200 cursor-pointer"
+			>
+				<p class="duration-200 group-hover:pl-2 poppins text-3xl font-semibold">FAQs</p>
+			</button>
+		</div>
+		<div class="flex flex-col items-center justify-center"></div>
+		<CTAs />
 	</div>
 {/if}
 <slot />
