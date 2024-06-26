@@ -3,6 +3,7 @@
 	import Footer from '../components/Footer.svelte';
 	import { openModal } from '../store';
 	import CTAs from '../components/CTAs.svelte';
+	import Header from '../components/Header.svelte';
 	let y;
 	$: outerHeight = 0;
 
@@ -48,15 +49,11 @@
 		<CTAs />
 	</div>
 {/if}
+{#if y > outerHeight}
+	<div class="bg-white fixed top-0 left-0 w-full flex flex-col z-20 px-4 fadeIn">
+		<Header />
+	</div>
+{/if}
 <slot />
 <Footer />
 <svelte:window bind:scrollY={y} bind:outerHeight />
-<!-- 
-header 
-hero 
-product description 
-user reviews
-faq
-conversion
-footer 
--->
